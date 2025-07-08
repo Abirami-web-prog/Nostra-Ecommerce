@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nostra - Contact</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background-color: #1c1f26;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .contact-box {
+      max-width: 600px;
+      width: 100%;
+      background-color: #1c1f26;
+      padding: 40px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .contact-box h2 {
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .contact-box form label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .contact-box form input,
+    .contact-box form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .contact-box form button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .contact-box form button:hover {
+      background-color: #0056b3;
+    }
+
+    #form-status {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+    }
+
+    footer .social-icons {
+      margin: 15px 0;
+    }
+
+    footer .social-icons a {
+      margin: 0 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Nostra</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-box">
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Submit</button>
+        <p id="form-status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <h3>Nostra</h3>
+    <p>© 2025 YourBrand. All rights reserved. Explore the latest in fashion with confidence and style. Fast delivery, easy returns, and top-exclusive deals.</p>
+    <div class="social-icons">
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="Instagram" width="20"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="20"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20"></a>
+    </div>
+    <p>@2025 Nostra.com</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // 🔁 Replace this with your deployed Apps Script Web App URL
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        status.innerHTML = "✅ Message sent successfully!";
+        form.reset();
+      })
+      .catch(error => {
+        status.innerHTML = "❌ Error! Try again later.";
+        console.error('Error:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
